@@ -1,0 +1,6 @@
+dearpygui
+mutagen
+pygame
+pytube
+tk
+
