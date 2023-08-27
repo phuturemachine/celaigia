@@ -10,7 +10,7 @@ Celaigia is a simple desktop application to search and download audio tracks fro
 ## Setup
 1. Clone the repository:
     ```bash
-    git clone <repository_url> celaigia
+    git clone git@github.com:phuturemachine/celaigia.git celaigia
     cd celaigia
     ```
 2. Install the required packages:
