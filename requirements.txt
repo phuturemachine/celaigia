@@ -1,6 +1,4 @@
-dearpygui
-mutagen
-pygame
-pytube
-tk
-
+yt_dlp
+tkinter
+mysql
+mysql.connector
