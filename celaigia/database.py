@@ -1,5 +1,5 @@
 # database.py
-
+import os
 import mysql.connector
 
 DATABASE_NAME = 'celagia'
@@ -11,7 +11,7 @@ def set_env_variable(key, value):
 
 class Database:
 
-    def __init__(self, db_name=DATABASE_NAME):
+    def __init__(self, db_name=DATABASE_NAME, port=3306):
         self.db_name = db_name
         try:
             user = os.environ['CELAIGIA_USER']
@@ -21,12 +21,14 @@ class Database:
             password = input("Enter your MySQL password: ")
             set_env_variable('CELAIGIA_USER', user)
             set_env_variable('CELAIGIA_PASSWORD', password)
+            set_env_variable('CELAIGIA_PORT', port)
 
         self.db = mysql.connector.connect(
             host="localhost",
             user=user,
             password=password,
-            database=self.db_name
+            database=self.db_name,
+            port = port
         )
         self.cursor = self.db.cursor()
 
@@ -63,7 +65,7 @@ class Database:
     def log_download(self, video_title, video_url, video_query=''):
 
         sql = "INSERT INTO download_logs (video_title, video_url, video_query) VALUES (%s, %s, %s);"
-        val = (video_title, video_url, video_query
+        val = (video_title, video_url, video_query)
         self.cursor.execute(sql, val)
         self.db.commit()
 
@@ -75,6 +77,8 @@ class Database:
         if result:
             return True
         return False
+
+    # conda list environments:
 
     def close(self):
         self.cursor.close()
